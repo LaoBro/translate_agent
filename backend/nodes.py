@@ -2,8 +2,6 @@
 from typing import Dict, Any
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.messages import SystemMessage, HumanMessage
-
 from backend.states import TranslationState
 from backend.utils import get_llm
 # backend/nodes.py 增加 helper 函数

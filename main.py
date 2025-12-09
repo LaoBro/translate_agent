@@ -42,7 +42,6 @@ async def process_document(
         agent_prompt = (
             f"用户上传了一个文件，路径是: {input_path}。\n"
             f"用户的指令是: {instruction}\n"
-            "请根据用户的指令，使用合适的工具处理该文件。"
         )
 
         print("--- [API] Awaiting Agent (Async)... ---")
@@ -54,8 +53,7 @@ async def process_document(
 
         # --- 结果获取逻辑 ---
         # Agent 执行完后，我们检查一下是否有对应的 output 文件生成。
-        # 目前我们的 Tool 逻辑是写死的生成 "translated_" 开头的文件。
-        # 如果用户只是问 "这个文件名叫什么"，可能不会生成文件，所以要容错。
+        # 如果用户只是问 "这个文件名叫什么"，可能不会生成文件
         
         expected_output_path = os.path.join("temp", f"translated_{filename}")
         file_content = ""

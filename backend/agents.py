@@ -1,10 +1,8 @@
 # backend/agents.py
-from typing import Literal, Dict, Any
+from typing import Literal
 from langchain_core.tools import tool
 from langgraph.graph import StateGraph, START, END
 from langchain.agents import create_agent
-from langchain_core.messages import SystemMessage
-
 from backend.states import TranslationState
 from backend.nodes import init_node, translate_node, merge_node, read_text_from_file, save_text_to_file
 from backend.utils import get_llm
