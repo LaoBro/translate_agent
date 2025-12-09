@@ -1,14 +1,14 @@
 # Translate Agent 
 
-这是一个基于 **LangGraph** 和 **LangChain** 的智能文档处理 Agent。并采用易于扩展的的 Multi-Agent 架构，能够根据用户的自然语言指令，自主调用工具处理长文档（目前只实现了 TXT 文件翻译）。
+这是一个基于 **LangGraph** 和 **LangChain** 的智能文档处理 Agent。采用了易于扩展的的 Multi-Agent 架构，使其能够根据用户的自然语言指令，自主调用工具处理长文档（但目前只实现了 TXT 文件翻译）。
 
 ## 技术栈
 
-*   **编排**: LangGraph, LangChain
+*   **Agent框架**: LangGraph, LangChain
 *   **LLM**: DeepSeek (兼容 OpenAI 协议)
 *   **后端**: FastAPI, Uvicorn
 *   **前端**: HTML5, JavaScript, Jinja2
-*   **工具**: TikToken (Token 计算), Python-Multipart
+*   **工具**: uv, TikToken, Python-Multipart
 
 ## 快速开始
 
