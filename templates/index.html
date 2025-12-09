@@ -14,7 +14,22 @@
         .container { display: flex; gap: 20px; height: 75vh; } /*稍微调小高度给输入框腾位置*/
         .box { flex: 1; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
         h1 { text-align: center; color: #333; margin-bottom: 10px; }
-        textarea { flex: 1; width: 100%; border: 1px solid #ddd; padding: 10px; border-radius: 8px; resize: none; font-size: 14px; line-height: 1.6; outline: none; }
+        
+        /* --- 修改处：添加了 box-sizing: border-box --- */
+        textarea { 
+            flex: 1; 
+            width: 100%; 
+            box-sizing: border-box; /* 关键修改：让宽度包含padding和border */
+            border: 1px solid #ddd; 
+            padding: 10px; 
+            border-radius: 8px; 
+            resize: none; 
+            font-size: 14px; 
+            line-height: 1.6; 
+            outline: none; 
+        }
+        /* ------------------------------------------- */
+
         textarea:focus { border-color: #007AFF; }
         
         .controls { 
@@ -51,14 +66,14 @@
     </style>
 </head>
 <body>
-    <h1>🤖 AI 智能文档助手</h1>
+    <h1>AI 智能文档助手</h1>
     
     <div class="controls">
         <!-- 第一行：文件选择 -->
         <div class="row">
             <input type="file" id="fileInput" accept=".txt" style="display: none;" onchange="handleFileSelect(this)">
             <label for="fileInput" class="file-upload">
-                <span id="fileName">📂 点击选择 TXT 文档</span>
+                <span id="fileName">点击选择 TXT 文档</span>
             </label>
         </div>
 
@@ -68,16 +83,16 @@
             <button id="uploadBtn" onclick="processRequest()">发送指令</button>
         </div>
         
-        <div id="loading" style="text-align: center;">🚀 Agent 正在思考并执行任务中... (请耐心等待)</div>
+        <div id="loading" style="text-align: center;">Agent 正在思考并执行任务中... (请耐心等待)</div>
     </div>
 
     <div class="container">
         <div class="box">
-            <h3>📄 原文预览</h3>
+            <h3>原文预览</h3>
             <textarea id="sourceText" readonly placeholder="上传文件后在此预览..."></textarea>
         </div>
         <div class="box">
-            <h3>🤖 Agent 回复与结果</h3>
+            <h3>Agent 回复与结果</h3>
             <textarea id="targetText" readonly placeholder="Agent 的执行结果将显示在这里..."></textarea>
         </div>
     </div>
@@ -88,7 +103,7 @@
         function handleFileSelect(input) {
             if (input.files && input.files[0]) {
                 selectedFile = input.files[0];
-                document.getElementById('fileName').textContent = "📄 " + selectedFile.name;
+                document.getElementById('fileName').textContent = selectedFile.name;
                 
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -116,7 +131,7 @@
 
             btn.disabled = true;
             loading.style.display = "block";
-            targetArea.value = "⏳ 正在发送请求给 Agent...\n指令：" + promptText;
+            targetArea.value = "正在发送请求给 Agent...\n指令：" + promptText;
 
             const formData = new FormData();
             formData.append("file", selectedFile);
@@ -133,7 +148,7 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    let output = "✅ Agent 任务完成！\n\n";
+                    let output = "Agent 任务完成！\n\n";
                     output += "【Agent 回复】:\n" + data.agent_response + "\n\n";
                     
                     if (data.translated_content) {
@@ -141,10 +156,10 @@
                     }
                     targetArea.value = output;
                 } else {
-                    targetArea.value = "❌ Error: " + data.detail;
+                    targetArea.value = "Error: " + data.detail;
                 }
             } catch (e) {
-                targetArea.value = "❌ 网络请求失败: " + e.message;
+                targetArea.value = "网络请求失败: " + e.message;
             } finally {
                 btn.disabled = false;
                 loading.style.display = "none";
