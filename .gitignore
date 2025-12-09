@@ -1,0 +1,30 @@
+.env
+.env.local
+.env.production
+
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# 虚拟环境文件夹
+.venv/
+env/
+venv/
+ENV/
+
+# 忽略存放上传文件和翻译结果的目录
+temp/
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+.idea/
+.vscode/
+*.swp
+测试用文档/
+计划.md
+agents测试.py
+nodes测试.py
+states测试.py
