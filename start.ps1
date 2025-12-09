@@ -1,6 +1,15 @@
 # start.ps1
 Write-Host ">>> 正在检查环境..." -ForegroundColor Cyan
 
+# 检查 uv 是否存在
+try {
+    $uvVersion = uv --version
+    Write-Host "检测到 uv: $uvVersion" -ForegroundColor Green
+} catch {
+    Write-Host "错误: 未检测到 uv 命令。请先安装 uv (https://github.com/astral-sh/uv)" -ForegroundColor Red
+    exit 1
+}
+
 # 检查 .env 是否存在
 if (-not (Test-Path ".env")) {
     Write-Host "错误: 未找到 .env 文件。请先创建并配置 DEEPSEEK_API_KEY。" -ForegroundColor Red
